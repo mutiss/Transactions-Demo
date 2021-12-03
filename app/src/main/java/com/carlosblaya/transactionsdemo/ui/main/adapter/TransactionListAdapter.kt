@@ -43,7 +43,7 @@ class TransactionListAdapter(private val list: MutableList<Transaction>)
             fun bind(item: Transaction){
                 binding.tvDate.text = DateFormater.formatDateFrom(item.date,DateFormater.DAY_MONTH_YEAR_TIME,DateFormater.WEEKDAY_DAY_MONTH_YEAR)
                     .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
-                binding.tvAmount.text = item.amount?.formatEuros(TransactionsApplication.context)
+                binding.tvAmount.text = item.finalAmount?.formatEuros(TransactionsApplication.context)
                 binding.tvAmount.colourizeAmount(TransactionsApplication.context)
                 binding.tvDescription.text = if(item.description.isNullOrBlank()) TransactionsApplication.context.resources.getString(R.string.transaction_without_description) else item.description
             }
@@ -53,7 +53,7 @@ class TransactionListAdapter(private val list: MutableList<Transaction>)
             fun bind(item:Transaction, listTransactions:List<Transaction>, position: Int){
                 binding.tvDate.text = DateFormater.formatDateFrom(item.date,DateFormater.DAY_MONTH_YEAR_TIME,DateFormater.WEEKDAY_DAY_MONTH_YEAR)
                     .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
-                binding.tvAmount.text = item.amount?.formatEuros(TransactionsApplication.context)
+                binding.tvAmount.text = item.finalAmount?.formatEuros(TransactionsApplication.context)
                 binding.tvAmount.colourizeAmount(TransactionsApplication.context)
                 binding.tvDescription.text = if(item.description.isNullOrBlank()) TransactionsApplication.context.resources.getString(R.string.transaction_without_description) else item.description
                 if( DateFormater.formatDateFrom(item.date,DateFormater.DAY_MONTH_YEAR_TIME,DateFormater.DAY_MONTH_YEAR) ==  DateFormater.formatDateFrom(listTransactions[position -1].date,DateFormater.DAY_MONTH_YEAR_TIME,DateFormater.DAY_MONTH_YEAR)){
